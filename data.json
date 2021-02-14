@@ -4,7 +4,7 @@
     "x": "Ain Témouchent",
     "value": 946603,
     "Nouveau_cas": 26,
-    "total_share": 46,
+    "total_cas": 46,
     "revenue": [
       ["Jan", 734278, 968],
       ["Feb", 829549, 951],
@@ -25,7 +25,7 @@
     "x": "ORAN",
     "value": 962852,
     "nouveau_cas": 56,
-    "total_share": 70,
+    "total_cas": 70,
     "revenue": [
       ["Jan", 954001, 916],
       ["Feb", 1049451, 939],
@@ -46,7 +46,7 @@
     "x": "Batna",
     "value": 519026,
     "nouveau_cas": 29,
-    "total_share": 47,
+    "total_cas": 47,
     "revenue": [
       ["Jan", 579928, 509],
       ["Feb", 333771, 500],
@@ -67,7 +67,7 @@
     "x": "Mostaghanem",
     "value": 540179,
     "nouveau_cas": 7,
-    "total_share": 44,
+    "total_cas": 44,
     "revenue": [
       ["Jan", 562889, 484],
       ["Feb", 585705, 518],
@@ -88,7 +88,7 @@
     "x": "Ghardaïa",
     "value": 398264,
     "nouveau_cas": 13,
-    "total_share": 31,
+    "total_cas": 31,
     "revenue": [
       ["Jan", 308662, 491],
       ["Feb", 365144, 437],
@@ -109,7 +109,7 @@
     "x": "Ain Delfa",
     "value": 1129872,
     "nouveau_cas": 41,
-    "total_share": 23,
+    "total_cas": 23,
     "revenue": [
       ["Jan", 1045171, 910],
       ["Feb", 937680, 892],
@@ -130,7 +130,7 @@
     "x": "Chlef",
     "value": 368505,
     "nouveau_cas": 28,
-    "total_share": 50,
+    "total_cas": 50,
     "revenue": [
       ["Jan", 507858, 472],
       ["Feb", 497647, 478],
@@ -151,7 +151,7 @@
     "x": "El Bayadh",
     "value": 386097,
     "nouveau_cas": 16,
-    "total_share": 20,
+    "total_cas": 20,
     "revenue": [
       ["Jan", 505175, 435],
       ["Feb", 582320, 452],
@@ -172,7 +172,7 @@
     "x": "Naâma",
     "value": 844451,
     "nouveau_cas": 43,
-    "total_share": 47,
+    "total_cas": 47,
     "revenue": [
       ["Jan", 1010422, 977],
       ["Feb", 834211, 961],
@@ -193,7 +193,7 @@
     "x": "Tlemcen",
     "value": 509576,
     "nouveau_cas": 8,
-    "total_share": 16,
+    "total_cas": 16,
     "revenue": [
       ["Jan", 452844, 513],
       ["Feb", 393437, 488],
@@ -214,7 +214,7 @@
     "x": "Tizi Ouzou",
     "value": 549959,
     "nouveau_cas": 22,
-    "total_share": 8,
+    "total_cas": 8,
     "revenue": [
       ["Jan", 467779, 457],
       ["Feb", 550917, 431],
@@ -235,7 +235,7 @@
     "x": "Tipaza",
     "value": 308333,
     "nouveau_cas": 27,
-    "total_share": 5,
+    "total_cas": 5,
     "revenue": [
       ["Jan", 315476, 511],
       ["Feb", 498905, 458],
@@ -256,7 +256,7 @@
     "x": "Saïda",
     "value": 433179,
     "nouveau_cas": 25,
-    "total_share": 31,
+    "total_cas": 31,
     "revenue": [
       ["Jan", 376741, 448],
       ["Feb", 425629, 460],
@@ -277,7 +277,7 @@
     "x": "Tiaret",
     "value": 902536,
     "nouveau_cas": 21,
-    "total_share": 72,
+    "total_cas": 72,
     "revenue": [
       ["Jan", 897237, 944],
       ["Feb", 959457, 967],
@@ -298,7 +298,7 @@
     "x": "Béjaya",
     "value": 792949,
     "nouveau_cas": 45,
-    "total_share": 70,
+    "total_cas": 70,
     "revenue": [
       ["Jan", 726317, 942],
       ["Feb", 902217, 962],
@@ -319,7 +319,7 @@
     "x": "Blida",
     "value": 1010092,
     "nouveau_cas": 23,
-    "total_share": 27,
+    "total_cas": 27,
     "revenue": [
       ["Jan", 831074, 897],
       ["Feb", 849428, 892],
@@ -340,7 +340,7 @@
     "x": "Bouia",
     "value": 546851,
     "nouveau_cas": 11,
-    "total_share": 39,
+    "total_cas": 39,
     "revenue": [
       ["Jan", 551842, 494],
       ["Feb", 472417, 469],
@@ -361,7 +361,7 @@
     "x": "Borj Bou Arréridj",
     "value": 370502,
     "nouveau_cas": 28,
-    "total_share": 9,
+    "total_cas": 9,
     "revenue": [
       ["Jan", 386035, 480],
       ["Feb", 573176, 518],
