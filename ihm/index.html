@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="fr">
+ <head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Covid - IHM</title>
+  
+  <meta content="AJAX Chart,Bar Chart,Chart from JSON,Choropleth Map,Circular Gauge,Column Chart,Dashboard,Dot Chart,Gauges,Geo Chart,Geo Visualization,JSON Chart,JSON Plot,Marker Chart,Multiple Axes,Statistical Data,Table Layout,Tooltip" name="keywords">
+  <meta content="AnyChart - JavaScript Charts designed to be embedded and integrated" name="description">
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  <link href="https://cdn.anychart.com/playground-css/maps_in_dashboard/sales_by_region/style.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" rel="stylesheet" type="text/css">
+  <style>html,
+body,
+#container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}</style>
+ </head>
+ <body>
+  <div id="container"></div>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-map.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-table.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js"></script>
+  <script src="https://cdn.anychart.com/geodata/latest/countries/algeria/algeria.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+  <script type="text/javascript">
+    anychart.onDocumentReady(function () {
+  // The data used in this sample can be obtained from the CDN
+  // https://cdn.anychart.com/samples/maps-in-dashboard/sales-by-region/data.json
+  anychart.data.loadJsonFile(
+    'https://sam05dz.github.io/data.json',
+    function (data) {
+      var regionsData = data;
+      var selectedPoint;
+      var mapChart;
+      var revenueChart;
+      var totalShareChart;
+      var marketShareChart;
+
+      var drawMapChart = function () {
+        var map = anychart.map();
+        map.geoData('anychart.maps.algeria');
+        map
+          .title()
+          .enabled(true)
+          .useHtml(true)
+          .text(
+            '<span style="color: #212121;">Covid Stat par Region</span>'
+          )
+          .fontSize(18)
+          .padding([15, 0, 15, 0]);
+
+        var cr = map.colorRange();
+        cr.enabled(true).colorLineSize(10).padding([15, 0, 0, 0]);
+        cr.marker().size(7);
+        cr.ticks()
+          .enabled(true)
+          .position('center')
+          .length(10)
+          .stroke('2 #fff');
+        cr.labels().format(function () {
+          var range = this.colorRange;
+          var name;
+          if (isFinite(range.start + range.end)) {
+            name =
+              range.start.toLocaleString() +
+              ' - ' +
+              range.end.toLocaleString();
+          } else if (isFinite(range.start)) {
+            name = '> ' + range.start.toLocaleString();
+          } else {
+            name = '< ' + range.end.toLocaleString();
+          }
+          return name;
+        });
+        cr.listen('mousedown', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+
+        var s1 = map.choropleth();
+        s1.geoIdField('id');
+        s1.labels(null);
+        var ocs = anychart.scales.ordinalColor([
+          { less: 350000 },
+          { from: 350000, to: 400000 },
+          { from: 400000, to: 450000 },
+          { from: 450000, to: 500000 },
+          { from: 500000, to: 550000 },
+          { greater: 550000 }
+        ]);
+        ocs.colors([
+          '#ffd54f',
+          '#FDC543',
+          '#F9B033',
+          '#F7A028',
+          '#F28110',
+          '#ef6c00'
+        ]);
+        s1.colorScale(ocs);
+        s1.hovered().fill('#1976d2 0.6');
+        s1.selected().fill('#1976d2');
+        s1.tooltip().title().fontSize(16);
+        s1.tooltip().titleFormat(function () {
+          return this.name;
+        });
+        s1.tooltip()
+          .useHtml(true)
+          .format(function () {
+            return (
+              '<span style="color:#d9d9d9">Revenue:</span> $' +
+              parseInt(this.value).toLocaleString()
+            );
+          });
+        map.padding(0, 30, 5, 0).margin(0);
+        map.getSeries(0).data(regionsData);
+        map.listen('pointsselect', function (e) {
+          selectedPoint = e.currentPoint;
+          if (selectedPoint) {
+            changeContents(selectedPoint.index);
+          }
+        });
+        return map;
+      };
+
+      var drawRevenueChart = function () {
+        var chart = anychart.column();
+        var s1 = anychart.scales.linear();
+        var s2 = anychart.scales.linear();
+        chart.padding([40, 0, 0, 0]);
+        chart.title().enabled(true).useHtml(true).padding([0, 0, 15, 0]);
+        chart.yAxis().scale(s1);
+        chart.yAxis().scale().minimum(0);
+        chart.yAxis(1).scale(s2);
+        chart.yAxis(1).scale().minimum(0);
+        var series = chart.column();
+        series.yScale(s1);
+        series.name('Total Cas');
+        series.tooltip().title().fontSize(16);
+        series.tooltip().titleFormat(function () {
+          return this.x;
+        });
+        series
+          .tooltip()
+          .useHtml(true)
+          .format(function () {
+            return (
+              '<span style="color:#d9d9d9">Units sold:</span> ' +
+              parseInt(this.getData('value_2')).toLocaleString() +
+              '<br/><span style="color:#d9d9d9">Revenue:</span> $' +
+              parseInt(this.value).toLocaleString()
+            );
+          });
+        var series2 = chart.line();
+        series2.yScale(s2);
+        series2.name('Nouveau Cas');
+        series2.tooltip().title().fontSize(16);
+        series2.tooltip().titleFormat(function () {
+          return this.x;
+        });
+        series2
+          .tooltip()
+          .useHtml(true)
+          .format(function () {
+            return (
+              '<span style="color:#d9d9d9">Nouveau Cas :</span> ' +
+              parseInt(this.value).toLocaleString() +
+              '<br/><span style="color:#d9d9d9">Toal Cas :</span>' +
+              parseInt(this.getData('value_2')).toLocaleString()
+            );
+          });
+        chart.interactivity('by-x');
+        chart.yAxis().orientation('left').title(null);
+        chart.yAxis(1).orientation('right').title(null);
+        chart.xAxis().title(null);
+        chart
+          .yAxis()
+          .labels()
+          .fontSize(11)
+          .format(function () {
+            return '$' + Math.abs(parseInt(this.value)).toLocaleString();
+          });
+        chart.yAxis(1).labels().padding(0, 0, 0, 5).fontSize(11);
+        chart.xAxis().labels().padding(5, 3, 0, 3).fontSize(11);
+        chart
+          .legend()
+          .position('center-bottom')
+          .enabled(true)
+          .tooltip(false)
+          .align('center')
+          .padding(10, 0, 0, 0);
+        chart.interactivity().selectionMode('none');
+        return chart;
+      };
+
+      function createSolidChart() {
+        var gauge = anychart.gauges.circular();
+        gauge.background(null);
+        gauge.fill(null);
+        gauge.stroke(null);
+        gauge.padding([30, 0, 0, 0]);
+        gauge.title().enabled(true).useHtml(true).padding([0, 0, 15, 0]);
+        var axis = gauge.axis().radius(70).width(1).fill(null);
+        axis
+          .scale()
+          .minimum(0)
+          .maximum(100)
+          .ticks({ interval: 1 })
+          .minorTicks({ interval: 1 });
+        axis.labels().enabled(false);
+        axis.ticks().enabled(false);
+        axis.minorTicks().enabled(false);
+        var stroke = '1 #e5e4e4';
+        gauge
+          .bar(0)
+          .dataIndex(0)
+          .radius(70)
+          .width(40)
+          .fill('#64b5f6')
+          .stroke(null)
+          .zIndex(5);
+        gauge
+          .bar(1)
+          .dataIndex(1)
+          .radius(70)
+          .width(40)
+          .fill('#F5F4F4')
+          .stroke(stroke)
+          .zIndex(4);
+        gauge
+          .label()
+          .text('')
+          .fontSize(20)
+          .hAlign('center')
+          .anchor('center')
+          .padding(0)
+          .zIndex(1);
+        return gauge;
+      }
+
+      var generalDataSet = anychart.data.set();
+      var firstMapping = generalDataSet.mapAs({
+        value: 1,
+        x: 0,
+        value_2: 2
+      });
+      var secondMapping = generalDataSet.mapAs({
+        value: 2,
+        x: 0,
+        value_2: 1
+      });
+
+      var changeContents = function (index) {
+        totalShareChart.data([regionsData[index].total_cas, 100]);
+        totalShareChart
+          .label()
+          .text(regionsData[index].total_cas + '%');
+        totalShareChart
+          .title()
+          .text(
+            'Total Cas<br/><span style="color: #212121; text-decoration: underline">' +
+            regionsData[index].x +
+            '</span>'
+          );
+        marketShareChart.data([regionsData[index].nouveau_cas, 100]);
+        marketShareChart
+          .label()
+          .text(regionsData[index].nouveau_cas + '%');
+        marketShareChart
+          .title()
+          .text(
+            'Nouveau Cas<br/><span style="color: #212121; text-decoration: underline">' +
+            regionsData[index].x +
+            '</span>'
+          );
+        generalDataSet.data(regionsData[index].revenue);
+        revenueChart.getSeries(0).data(firstMapping);
+        revenueChart.getSeries(1).data(secondMapping);
+        revenueChart
+          .title()
+          .text(
+            'Historique des Cas <span style="color: #212121; text-decoration: underline">' +
+            regionsData[index].x +
+            '</span>'
+          );
+      };
+      mapChart = drawMapChart();
+      revenueChart = drawRevenueChart();
+      totalShareChart = createSolidChart();
+      marketShareChart = createSolidChart();
+
+      function fillInMainTable(flag) {
+        if (flag === 'wide') {
+          layoutTable.contents(
+            [
+              [mapChart, revenueChart, null],
+              [null, totalShareChart, marketShareChart]
+            ],
+            true
+          );
+          layoutTable.getCell(0, 1).colSpan(2);
+          layoutTable.getCell(0, 0).rowSpan(3);
+          layoutTable.getCol(0).width('55%');
+          layoutTable.getRow(0).height(null);
+        } else {
+          layoutTable.contents(
+            [
+              [mapChart, null],
+              [revenueChart, null],
+              [totalShareChart, marketShareChart]
+            ],
+            true
+          );
+          layoutTable.getCell(0, 0).colSpan(2);
+          layoutTable.getCell(1, 0).colSpan(2);
+          layoutTable.getCol(0).width(null);
+          layoutTable.getRow(0).height(400);
+        }
+        layoutTable.draw();
+      }
+
+      // Setting layout table
+      var layoutTable = anychart.standalones.table();
+      layoutTable.cellBorder(null);
+      layoutTable.container('container');
+
+      if (window.innerWidth > 768) fillInMainTable('wide');
+      else {
+        fillInMainTable('slim');
+      }
+
+      mapChart.getSeries(0).select(5);
+      changeContents(5);
+      // On resize changing layout to mobile version or conversely
+      window.onresize = function () {
+        if (layoutTable.colsCount() === 2 && window.innerWidth > 767) {
+          fillInMainTable('wide');
+        } else if (
+          layoutTable.colsCount() === 3 &&
+          window.innerWidth <= 767
+        ) {
+          fillInMainTable('slim');
+        }
+      };
+    }
+  );
+});</script>
+ </body>
+</html>
