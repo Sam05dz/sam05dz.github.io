@@ -2,7 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>COVID-19 DataViz: IHM</title>
+    <meta name="description" content="Suivi des statistiques des personnes atteint du COVID-19 pour les 48 wilayas.">
+    <meta name="keywords" content="Devoir IHM - ISIL L3 2020/2021 ">
+    <meta name="author" content="Houssam HAMOUDA">
+    <title>isiL IHM - COVID-19</title>
+    <link rel = "icon" href = "css/icon.svg" 
+        type = "image/x-icon"> 
 
     <!-- amCharts includes -->
     <script src="api/core.js"></script>
@@ -12,11 +17,13 @@
     <script src="lang/AR.js"></script>
     <script src="lang/ar_AR.js"></script>
     <!-- themes includes -->
+    <script src="themes/patterns.js"></script>
     <script src="themes/dark.js"></script>
     <script src="themes/animated.js"></script>
     <!--maps-->
     <script src="data/algeriaLow.js"></script>
-    <script src="data/states_dz.js"></script>
+    <script src="data/wilaya_dz.js"></script>
+    <script src="data/wilaya_dz_ar.js"></script>
 
     <!-- DataTables includes -->
     <script src="js/jquery/jquery-3.3.1.min.js"></script>
@@ -24,7 +31,7 @@
     <link rel="stylesheet" media="all" href="css/select.dataTables.min.css" />
     <script src="js/jquery/jquery.dataTables.min.js"></script>
     <script src="js/jquery/dataTables.select.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.22/i18n/Arabic.json"></script>
+    <!--script src="//cdn.datatables.net/plug-ins/1.10.22/i18n/Arabic.json"></script-->
 
     <!-- Data  -->
     <script src="data/dz_timeline.js"></script>
@@ -32,13 +39,11 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" media="all" href="css/dark.css" />
-
-
+  
     <!-- Main app -->
     <script src="js/app.js"></script>
   </head>
   <body>
-  	
     <div class="flexbox">
       
       <div id="list">
