@@ -10,6 +10,10 @@ body {
 	display: flex;
 }
 
+.navbar {
+    min-height: 55px;
+}
+
 #chartdiv {
 	flex: 1;
 	height: 100vh;
