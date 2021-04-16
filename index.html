@@ -1,199 +1,42 @@
+
 <!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>IHM - Covid ISIL L3</title>
+<html itemscope itemtype="http://schema.org/WebPage" lang="fr" dir="ltr">
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<title id="title">Rechercher</title>
 
-      
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="icon" href="https://assets.zorincdn.com/images/favicon.ico">
+	<link href="css/inter.css" rel="stylesheet" type="text/css">
 
-    <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/tools.js"></script>
+	<script src="js/scripts.js"></script>
+	<script src="js/base.js"></script>
 
-    <style>
-      .card {
-  display: block;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    line-height: 1.42857143;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-    transition: box-shadow .25s;
-}
-.card:hover {
-  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.img-card {
-  width: 100%;
-  height:250px;
-  border-top-left-radius:2px;
-  border-top-right-radius:2px;
-  display:block;
-    overflow: hidden;
-}
-.img-card img{
-  width: 100%;
-  height: 250px;
-  object-fit:cover;
-  transition: all .25s ease;
-}
-.card-content {
-  padding:15px;
-  text-align:left;
-}
-.card-title {
-  margin-top:0px;
-  font-weight: 700;
-  font-size: 1.65em;
-}
-.card-title a {
-  color: #000;
-  text-decoration: none !important;
-}
-.card-read-more {
-  border-top: 1px solid #D4D4D4;
-}
-.card-read-more a {
-  text-decoration: none !important;
-  padding:10px;
-  font-weight:600;
-  text-transform: capitalize
-}
+	
 
-    </style>
+</head>
+<body>
+<div id="engines"></div>
 
-    
-    <!-- Custom styles for this template -->
-    <link href="css/album.css" rel="stylesheet">
-  </head>
-  <body>
-    
-<header>
-  <div class="collapse bg-dark" id="navbarHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">A propos..</h4>
-          <p class="text-muted">Devoir du Module IHM , qui présente une visualisation des cas de covid en algérie depuis janvier 2020. Houssam Hamouda.</p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="mailto:houssam.hamouda@gmail.com" class="text-white">Email me</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div id="container">
+		<form id="form" onsubmit="return doSearch()">
+			<div id="input"><input id="i" type="text" autocomplete="off" spellcheck="false" placeholder="Chercher.." /></div>
+			<a onclick="nextLanguage()" id="lang"></a>
+			<ul id="sugs"></ul>
+		</form>
 
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <img src="devoir-ihm/css/icon.svg" alt="Covid-19" width="50" height="50">
-        <strong>IHM - COVID</strong>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
-</header>
+		<p id="method"></p>
+	</div>
 
-   <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-4">
-            <div class="card">
-                <a class="img-card" href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/coronavirus-disease-covid-19#:~:text=symptomes">
-                    <img src="img/consigne.jpg" />
-                </a>
-                <br />
-                <div class="card-content">
-                    <h4 class="card-title">
-                        <a href="#">
-                            Info sur le Covid
-                        </a>
-                    </h4>
-                    <div class="">
-                        Découvrez les Mesures de Protection selon l'OMS
-                    </div>
-                </div>
-                <div class="card-read-more">
-                    <a class="btn btn-link btn-block" href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/coronavirus-disease-covid-19#:~:text=symptomes">
-                        en savoir plus..
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-4">
-            <div class="card">
-                <a class="img-card" href="devoir-ihm/">
-                    <img src="img/live.png" />
-                </a>
-                <br />
-                <div class="card-content">
-                    <h4 class="card-title">
-                        <a href="devoir-ihm/">
-                            Suivi des Cas
-                        </a>
-                    </h4>
-                    <div class="">
-                        La carte de l'épidémie de Covid-19 en Algérie, depuis janvier 2020
-                    </div>
-                </div>
-                <div class="card-read-more">
-                    <a class="btn btn-link btn-block" href="devoir-ihm/">
-                        Visualiser..
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-4">
-            <div class="card">
-                <a class="img-card" href="#">
-                    <img src="img/ihm.jpg" />
-                </a>
-                <br />
-                <div class="card-content">
-                    <h4 class="card-title">
-                        <a href="#">
-                            a propos 
-                        </a>
-                    </h4>
-                    <div class="">
-                        A propos du module IHM
-                    </div>
-                </div>
-                <div class="card-read-more">
-                    <a class="btn btn-link btn-block" href="#">
-                        Lire..
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-</main>
-
-<footer class="text-muted">
-  <div class="container">
-    <p class="float-right">
-      <a href="#">retour</a>
-    </p>
-    <p>Devoir IHM &copy; houssam Hamouda 2021 - ISIL L3 - Université Batna 2 - Ben Boulaid- Fesdis</p>
-    
-  </div>
-</footer>
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="js/vendor/jquery.slim.min.js"><\/script>')</script><script src="js/bootstrap.bundle.min.js"></script>
-
-      
-  </body>
+	<footer>
+		<div class="legal">
+			<div class="info">
+				<div class="copyright"><span>© 2021 Houssam HAMOUDA</span> All Rights Reserved.<br>Any trademarks or logos used on this site are property of their respective owners.</div>
+				<div class="terms"><a href="https://sam05dz.github.io/legal/terms">Terms of Service</a><a href="https://sam05dz.github.io/legal/privacy">Privacy Policy</a><a href="https://sam05dz.github.io/legal/cookies">Cookies Policy</a></div>
+			</div>
+		</div>
+	</footer>
+</body>
 </html>
