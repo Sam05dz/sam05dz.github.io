@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Suivi des statistiques des personnes atteint du COVID-19 pour les 48 wilayas.">
+    <meta name="keywords" content="Devoir IHM - ISIL L3 2020/2021 ">
+    <meta name="author" content="Houssam HAMOUDA">
+    <title>isiL IHM - COVID-19</title>
+    <link rel = "icon" href = "css/icon.svg" 
+        type = "image/x-icon"> 
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+
+    <!-- amCharts includes -->
+    <script src="api/core.js"></script>
+    <script src="api/charts.js"></script>
+    <script src="api/maps.js"></script>
+    <script src="lang/fr_FR.js"></script>
+    <script src="lang/AR.js"></script>
+    <script src="lang/ar_AR.js"></script>
+    <!-- themes includes -->
+    <script src="themes/patterns.js"></script>
+    <script src="themes/dark.js"></script>
+    <script src="themes/animated.js"></script>
+    <!--maps-->
+    <script src="data/algeriaLow.js"></script>
+    <script src="data/wilaya_dz.js"></script>
+    <script src="data/wilaya_dz_ar.js"></script>
+
+    <!-- DataTables includes -->
+    <script src="js/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" media="all" href="css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" media="all" href="css/select.dataTables.min.css" />
+    <script src="js/jquery/jquery.dataTables.min.js"></script>
+    <script src="js/jquery/dataTables.select.min.js"></script>
+    <!--script src="//cdn.datatables.net/plug-ins/1.10.22/i18n/Arabic.json"></script-->
+
+    <!-- Data  -->
+    <script src="data/dz_timeline.js"></script>
+    <script src="data/dz_total_timeline.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" media="all" href="css/dark.css" />
+     
+    <!-- Main app -->
+    <script src="js/app.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    $('#area').dataTables_length( {
+        "language": {
+            "lengthMenu": "Montrer _MENU_ wilaya par page",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)"
+        }
+    } );
+} );
+    </script>
+  </head>
+  <body>
+    
+     
+
+    
+   
+   
+    <div class="flexbox">
+      <div id="list">
+        <table id="areas" class="compact hover order-column row-border">
+          <thead>
+            <tr>
+              <th>Wilaya</th>
+              <th>Confirmé</th>
+              <th>Décés</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div id="chartdiv"></div>
+    </div>
+    </body>
+</html>
