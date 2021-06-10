@@ -1,0 +1,114 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE CVTEQUE SYSTEM "CVTEQUE.dtd">
+<CVTEQUE>
+	<CV ID="1">
+		<Entête>
+			<nom>Hamouda</nom>
+			<prénom>houssam</prénom>
+			<date_et_lieu_de_naissance>24/10/1976 à Batna</date_et_lieu_de_naissance>
+			<adresse_émail>houssam.hamouda@gmail.com</adresse_émail>
+			<image>hh.jpg</image>
+		</Entête>
+		<Poste_actuel>
+			<poste_actuel>IT HelpDesk</poste_actuel>
+		</Poste_actuel>
+		<diplôme_obtenues>
+			<diplôme_obtenue>DEUA en Informatique de Gestion</diplôme_obtenue>
+		</diplôme_obtenues>
+		<Stages/>
+		<Compétences_techniques>
+			<compétence_technique>Delphi</compétence_technique>
+			<compétence_technique>Java</compétence_technique>
+			<compétence_technique>Html</compétence_technique>
+			<compétence_technique>PHP</compétence_technique>
+			<compétence_technique>Laravel</compétence_technique>
+			<compétence_technique>javaScript</compétence_technique>
+			<compétence_technique>NodeJs</compétence_technique>
+			<compétence_technique>ReactJs</compétence_technique>
+		</Compétences_techniques>
+		<Langues>
+			<langue>Arabe</langue>
+			<langue>Français</langue>
+			<langue>Anglais</langue>
+			<langue>Espagnole</langue>
+			<langue>Allemand</langue>
+			<langue>Russe</langue>
+			<langue>Chaoui</langue>
+		</Langues>
+		<Loisirs>
+			<loisir>Sport</loisir>
+			<loisir>Nouvelles technologies</loisir>
+			<loisir>Sciences Fiction</loisir>
+			<loisir>Robotique</loisir>
+			<loisir>Electronique</loisir>
+			<loisir>Voyages</loisir>
+		</Loisirs>
+	</CV>
+	<CV ID="2">
+		<Entête>
+			<nom>Diab</nom>
+			<prénom>Chaker</prénom>
+			<date_et_lieu_de_naissance>16/01/1976 à Batna</date_et_lieu_de_naissance>
+			<adresse_émail>Chakerdiab@gmail.com</adresse_émail>
+			<image>cd.jpg</image>
+		</Entête>
+		<Poste_actuel>
+			<poste_actuel>Enquêteur</poste_actuel>
+		</Poste_actuel>
+		<diplôme_obtenues>
+			<diplôme_obtenue>DEUA en Informatique de Gestion</diplôme_obtenue>
+		</diplôme_obtenues>
+		<Stages/>	
+		<Compétences_techniques>
+			<compétence_technique>Delphi</compétence_technique>
+			<compétence_technique>Java</compétence_technique>
+			<compétence_technique>Html</compétence_technique>
+		</Compétences_techniques>
+		<Langues>
+			<langue>Arabe</langue>
+			<langue>Français</langue>
+			<langue>Anglais</langue>
+		</Langues>
+		<Loisirs>
+			<loisir>Sport</loisir>
+			<loisir>Nouvelles technologies</loisir>
+			<loisir>Voyages</loisir>
+		</Loisirs>
+	</CV>
+	<CV ID="3">
+		<Entête>
+			<nom>Hagain</nom>
+			<prénom>Aziz</prénom>
+			<date_et_lieu_de_naissance>01/02/1982 à Batna</date_et_lieu_de_naissance>
+			<adresse_émail>zizou05@gmail.com</adresse_émail>
+			<image>ah.jpg</image>
+		</Entête>
+		<Poste_actuel>
+			<poste_actuel>Sapeur Pompier</poste_actuel>
+		</Poste_actuel>
+		<diplôme_obtenues>
+			<diplôme_obtenue>DEUA en Informatique de Gestion</diplôme_obtenue>
+		</diplôme_obtenues>
+		<Stages>
+			<stage>Ecole Nationale Des Sapeurs Pompier</stage>
+			<stage>Organisation Arabe du Croissant Rouge</stage>
+		</Stages>
+		<Compétences_techniques>
+			<compétence_technique>Delphi</compétence_technique>
+			<compétence_technique>Java</compétence_technique>
+			<compétence_technique>Html</compétence_technique>
+			<compétence_technique>PHP</compétence_technique>
+		</Compétences_techniques>
+		<Langues>
+			<langue>Arabe</langue>
+			<langue>Français</langue>
+			<langue>Anglais</langue>
+		</Langues>
+		<Loisirs>
+			<loisir>Sport</loisir>
+			<loisir>Secourisme</loisir>
+			<loisir>hicking</loisir>
+		</Loisirs>
+	</CV>
+</CVTEQUE>
