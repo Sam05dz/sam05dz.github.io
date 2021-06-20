@@ -1,4 +1,4 @@
-# Devoir IHM - dz Covid Tracker
+#Dz Covid Tracker
 
 A project for a Educational Exam : application Covid Tracker in Algeria that only requires a Webbrowser container to run . The UI is built with Html & JavaScript only.
 
