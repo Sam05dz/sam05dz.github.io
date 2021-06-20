@@ -341,7 +341,7 @@ function animateBullet(circle) {
 	// Titre
 	var title = mapChart.titles.create();
 	title.fontSize = "1.5em";
-	title.text = "iSiL - TD IHM COVID-19 ";
+	title.text = "iSiL PFE COVID-19 ";
 	title.align = "left";
 	title.horizontalCenter = "left";
 	title.marginLeft = 20;
