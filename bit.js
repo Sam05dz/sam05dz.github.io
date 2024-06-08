@@ -20,9 +20,9 @@ const autoGoIn = localStorage.getItem("autoGoIn");
 let counter = 0;
 const currAcount = {};
 const configuration = {};
-const IamgeUploaderApiKey = ["189c1e9e725c9ed302499c85013eee94", "d0907f47af32417126fde20ef07bb8b4", "caa6fe689ad620de48bdccbb49e9bb61"];
+const IamgeUploaderApiKey = ["f00cbf90bd1833caa9d760e0bde95505", "cee07c2224129c3f6a6cee1ede2e16cb", "b4315a6fbcf15dedad6fbc8510bf0248"];
 const ImageUploaderApiEndpoint = "https://api.imgbb.com/1/upload";
-const apikey = "saadjel-dc0139ef-f675-d2fe-adf3-a52a26c774cd";
+const apikey = "nadjibmeharzidv-d0570db9-e662-cf1d-332d-ff4000f47b51";
 function observerFun(_0x5373fb, _0x75621f, _0x2b9557 = false, _0x4d0d8d = "style") {
   const _0x57bacb = new MutationObserver(_0x29327d => {
     for (const _0xa74b56 of _0x29327d) {
