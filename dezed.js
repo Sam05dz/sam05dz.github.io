@@ -969,7 +969,7 @@ function assidd(_0xfada81) {
       return false;
     }
     if (_0xfada81.available == false) {
-      alert("No Appointments Available");
+      alert("Makanch Les RDVS !");
       return false;
     }
   }
