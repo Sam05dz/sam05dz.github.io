@@ -31,7 +31,19 @@ eng.wikipedia = {
 	logo: "wikipedia.png",
 	places: {
 		'Search'        : ["https://wikipedia.org/wiki/Special:Search?search=%query%&fulltext=Search", false],
-		'Go to Article' : ["https://wikipedia.org/wiki/Special:Search?search=%query%&go=Go", false],
+		'Go to Article' : ["https://wikipedia.org/wiki/Special:Search?search=%query%&go=Go", false]
+	}
+};
+
+/*	GITHUB
+	----------------------------------------------------- */
+	
+eng.wikipedia = {
+	pageTitle: "Github",
+	logo: "github.png",
+	places: {                    
+		'Search'        : ["https://github.com/search?q==%query%&type=repositories", false]
+		
 	}
 };
 
