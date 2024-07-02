@@ -18,7 +18,7 @@ eng.facebook = {
 	pageTitle: "Facebook",
 	logo: "facebook.png",
 	places: {
-		'Web'    : ["https://web.facebook.com/search?q=%query%", false],
+		'Web'    : ["https://web.facebook.com/search?q=%query%", false]
 		
 	}
 };
