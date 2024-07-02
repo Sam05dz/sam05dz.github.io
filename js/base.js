@@ -52,7 +52,7 @@ eng.youtube = {
 	----------------------------------------------------- */
 
 eng.twitter = {
-	pageTitle: "Twitter",
+	pageTitle: "X",
 	logo: "twitter.png",
 	places: {
 		'Search Twitter' : ["https://twitter.com/search?q=%query%", false]
