@@ -42,7 +42,7 @@ eng.wikipedia = {
 	pageTitle: "Github",
 	logo: "github.png",
 	places: {                    
-		'Search'        : ["https://github.com/search?q==%query%&type=repositories", false]
+		'Search'        : ["https://github.com/search?q=%query%&type=repositories", false]
 		
 	}
 };
