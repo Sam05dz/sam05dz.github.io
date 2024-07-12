@@ -3,7 +3,23 @@
     bootstrapCDN.rel = 'stylesheet';
     bootstrapCDN.href = 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css';
     document.head.appendChild(bootstrapCDN);
+  const people = [
+           //Yahia pro
+        { name: 'ناهي المهدي', wilaya: '16', nin: '109710580004980000', nss: '710498003444', num: '0773282672' },
+     //karim halim
+        { name: 'bousakran', wilaya: '31', nin: '109581121000050005', nss: '580005047058', num: '0799492504' },
+        { name: 'dalila', wilaya: '31', nin: '129671110014740007', nss: '671474001351', num: '0699752120' },
+        { name: 'radia', wilaya: '31', nin: '119881049008820002', nss: '880882004536', num: '0776479470' },
+        { name: 'radia2', wilaya: '31', nin: '119840364047170008', nss: '844717001053', num: '0798507208' },
+     //babalius
+        { name: 'baba lilus', wilaya: '16', nin: '109840555022990001', nss: '842299001044', num: '0561101294' },
+     //cazanova
+        { name: 'cazanova 1', wilaya: '5', nin: '109910117014130009', nss: '911413003756', num: '0699262262' },
+        { name: 'cazanova 2', wilaya: '5', nin: '109830170005010000', nss: '830501010370', num: '0672147140' },
+     // nani
+        { name: 'nani', wilaya: '31', nin: '109820797009280007', nss: '131848', num: '0777581413' },
 
+    ];
  function generateCaptcha(length) {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
