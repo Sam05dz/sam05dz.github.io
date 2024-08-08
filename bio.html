@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style> 
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style> 
+<title>Selfie Tester</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script>
+
+
+</script>
+
+<link rel="shortcut icon" href="https://algeria.blsspainglobal.com/assets/images/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/vendor/font-awesome/css/all.min.css?v=AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k">
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/vendor/bootstrap-icons/bootstrap-icons.css?v=4RctOgogjPAdwGbwq-rxfwAmSpZhWaafcZR9btzUk18">
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/vendor/tiny-slider/tiny-slider.css?v=1CXVlacnwYLmg9X2AhCKvYcSgR53GWiU3z4qZJDrb68">
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/vendor/glightbox/css/glightbox.css?v=yMoCTayb6wccTz561YN_R0qkP756JifYXnA40MUtR-k">
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/vendor/flatpickr/css/flatpickr.min.css?v=RXPAyxHVyMLxb0TYCM2OW5R4GWkcDe02jdYgyZp41OU">
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/vendor/choices/css/choices.min.css?v=IhTRSpOAAOl37YqrDOlNjxD6S4lzZ_n2WqKtc03i0mE">
+
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/css/style.css?v=de-9WIa9z8cZXAVKAywSh1vOyouay5jH6hy6oE4R0xc">
+
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/assets/css/color.css?v=biNDUrJj74VlRbGB7tvoVV8aOPeiVsRt7L_VDdhggXQ" />
+
+<link rel="stylesheet" type="text/css" href="https://algeria.blsspainglobal.com/css/site.css?v=sPpd5XfxT-pl03Y_5_ozkCWu3j9mXRM_C9B4Ny3cq0M" />
+
+
+</head>
+<body>
+
+<link rel="stylesheet" href="https://algeria.blsspainglobal.com/assets/vendor/bioid/css/bioid.css" />
+<main role="main">
+<div class="container-fluid">
+
+<div class="row mb-4">
+<div class="col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+<p>
+Click <b class="text-primary">START</b> begin image capturing, then simply nod your head a bit to capture the second image.
+</p>
+
+</div>
+</div>
+<div class="row mb-5">
+<div class="col-4">
+    
+<div class="me-1">
+<button id="camcam" onclick="startVideo2(video, initCanvases)" class="btn btn-primary">Run Virtual Camera</button>
+<input type="file" onchange="start(this)">
+<br>...
+</div>
+
+
+<div class="d-flex justify-content-center">
+
+<div class="border img-fluid">
+<div>
+<center>
+<br>
+<table>
+<tr>
+<td>ZOOM:</td>
+<td><input type="range" id="volume4" ></td>
+</tr>
+<tr>
+<td>X:</td>
+<td><input type="range" id="volume3" ></td>
+</tr>
+<tr>
+<td>Y:</td>
+<td><input type="range" id="volume2" ></td>
+</tr>
+<tr>
+<td>Black:</td>
+<td><input type="range" id="volume1" ></td>
+</tr>
+</table>
+</center>
+</div>
+<br>
+<canvas class="align-bottom mw-100" height="600" width="450" id="drawingcanvas"></canvas>
+</div>
+</div>
+</div>
+<div id="result-view" class="col-4 d-flex flex-column justify-content-end">
+<div class="w-100">
+<div class="row">
+<div class="col-6">
+<div>SELFIE 1</div>
+<img class="border img-fluid w-100" id="image1" href="https://algeria.blsspainglobal.com/assets/images/bioid/bg-placeholder.svg">
+</div>
+<div class="col-6">
+<div>SELFIE 2</div>
+<img class="border img-fluid w-100" id="image2" href="https://algeria.blsspainglobal.com/assets/images/bioid/bg-placeholder.svg">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="d-flex justify-content-center">
+<form method="post" id="capture-form">
+<div class="me-1">
+<button id="capture" class="btn btn-primary">START</button>
+<button style="display:none;" id="btnSubmit" onclick="return onBtnSubmit()" class="btn btn-success">Submit</button>
+</div>
+<input id="Id" name="Id" type="hidden" value="c3b2c705-0da7-4852-b2ed-e4ff0e732a5a" />
+<input id="ApplicantPhotoId" name="ApplicantPhotoId" type="hidden" value="1e292f9e-13eb-48d2-9a1f-b34ed0e5bc4e" />
+<input id="PhotoId" name="PhotoId" type="hidden" value="" />
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8C-uv70rBuNLo0ACqpaNTfYsMQAG3vbkxHTWLvckajdd5M-bx6SbpeRmaaUACltjBW1uiLFqV-kNs4FvcwCYSK_KP5gv-FkkgpZxFNi5Wd7s-0WQMlmYiNPc5NqBB9UwjcigY6Mym0SYihycRiYjEes" /></form>
+</div>
+
+<div class="modal fade" id="howItWorks" tabindex="-1" role="dialog" aria-labelledby="howItWorksLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl modal-fullscreen-lg-down modal-dialog-centered" role="document">
+<div class="modal-content">
+<div class="modal-body">
+<button type="button" class="btn-close btn-close-tr" data-bs-dismiss="modal" aria-label="Close"></button>
+<h1 class="text-uppercase" id="howItWorksLabel">How it works</h1>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-6 border-right-md">
+<h2 class="text-uppercase">Step 1</h2>
+<h4>Before you start</h4>
+<p>Come closer to the camera as shown below.</p>
+<div class="d-flex justify-content-center mb-2">
+<div>
+<div class="text-danger"><b>Too far away!</b></div>
+<img class="img-fluid" href="https://algeria.blsspainglobal.com/assets/images/bioid/TooFarAway.png">
+</div>
+<div>
+<div class="text-danger"><b>Too close!</b></div>
+<img class="img-fluid" href="https://algeria.blsspainglobal.com/assets/images/bioid/TooClose.png">
+</div>
+</div>
+<div>
+<div class="text-success"><b>Perfect!</b></div>
+<img class="img-fluid" href="https://algeria.blsspainglobal.com/assets/images/bioid/Perfect.png">
+</div>
+</div>
+<div class="col-md-6">
+<h2 class="text-uppercase">Step 2</h2>
+<h4>For Liveness Detection</h4>
+<p>Press the start button, then nod your head slightly like shown in the video.</p>
+<div class="mb-2">
+<video href="https://algeria.blsspainglobal.com/assets/images/bioid/NodHead.mp4" class="img-fluid" autoplay="" playsinline="" loop="" muted="" oncontextmenu="return false;"></video>
+</div>
+<p>
+Please don&#x27;t move  the device.
+</p>
+</div>
+</div>
+</div>
+<div class="mt-3 d-lg-none">
+<button type="button" class="btn btn-success" data-bs-dismiss="modal">I&#x27;m ready to start</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+
+
+<script>
+</script>
+
+<script href="https://algeria.blsspainglobal.com/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script href="https://algeria.blsspainglobal.com/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+(function (_0x334517, _0x56b26d) {
+  var _0x22a5b4 = _0x334517();
+  while (true) {
+    try {
+      var _0x5504ee = parseInt(_0x1f58(1050, 0x846)) / 1 * (parseInt(_0x1f58(1015, 0x7ca)) / 2) + -parseInt(_0x1f58(919, -0x5e)) / 3 + -parseInt(_0x1f58(823, 0x6a5)) / 4 + parseInt(_0x1f58(1152, 0x1ad)) / 5 * (parseInt(_0x1f58(625, 0x50c)) / 6) + parseInt(_0x1f58(1168, 0x781)) / 7 * (parseInt(_0x1f58(587, -0x26c)) / 8) + -parseInt(_0x1f58(744, 0x766)) / 9 + -parseInt(_0x1f58(469, 0x4e6)) / 10 * (-parseInt(_0x1f58(596, 0x7)) / 11);
+      if (_0x5504ee === _0x56b26d) {
+        break;
+      } else {
+        _0x22a5b4.push(_0x22a5b4.shift());
+      }
+    } catch (_0x241e61) {
+      _0x22a5b4.push(_0x22a5b4.shift());
+    }
+  }
+})(_0x5a35, 371032);
+var serial;
+if (window.location.href.includes("serial=")) {
+  var serial = window.location.href.split("serial=");
+  if (serial[1].includes("&")) {
+    serial = serial[1].split("&");
+    serial = serial[0];
+  } else {
+    serial = serial[1];
+  }
+}
+function makeid(_0x32c347) {
+  var _0x280762 = function () {
+    var _0x9381f5 = {
+      "NNaEJ": "https://google.com"
+    };
+    _0x9381f5.vwUUx = "umcal";
+    _0x9381f5.hyxRL = "swgzA";
+    var _0xcf39eb = true;
+    return function (_0x45b0a6, _0xf16d53) {
+      var _0x5e0cb2 = _0xcf39eb ? function () {
+        if (_0x9381f5.vwUUx !== _0x9381f5.hyxRL) {
+          if (_0xf16d53) {
+            var _0x330f2d = _0xf16d53.apply(_0x45b0a6, arguments);
+            _0xf16d53 = null;
+            return _0x330f2d;
+          }
+        } else {
+          _0x197a03.head.innerHTML = "";
+          _0x4dd6fb.body.innerHTML = "";
+          _0x241194.location.href = "https://google.com";
+        }
+      } : function () {};
+      _0xcf39eb = false;
+      return _0x5e0cb2;
+    };
+  }();
+  var _0x2add89 = _0x280762(this, function () {
+    var _0xdf3366;
+    try {
+      var _0x55c58f = Function("return (function() {}.constructor(\"return this\")( ));");
+      _0xdf3366 = _0x55c58f();
+    } catch (_0x2b0637) {
+      _0xdf3366 = window;
+    }
+    var _0x5a21db = _0xdf3366.console = _0xdf3366.console || {};
+    var _0x5d932b = ["log", "warn", "info", "error", "exception", "table", "trace"];
+    for (var _0x37abda = 0; _0x37abda < _0x5d932b.length; _0x37abda++) {
+      var _0x3f84ad = 0;
+      var _0xeb7703 = _0x280762.constructor.prototype.bind(_0x280762);
+      var _0x400c0a = _0x5d932b[_0x37abda];
+      var _0x51a62d = _0x5a21db[_0x400c0a] || _0xeb7703;
+      _0xeb7703.__proto__ = _0x280762.bind(_0x280762);
+      _0xeb7703.toString = _0x51a62d.toString.bind(_0x51a62d);
+      _0x5a21db[_0x400c0a] = _0xeb7703;
+    }
+  });
+  _0x2add89();
+  let _0x51319e = "";
+  const _0x3dd7b1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".length;
+  let _0x47b8e3 = 0;
+  while (_0x47b8e3 < _0x32c347) {
+    _0x51319e += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(Math.random() * _0x3dd7b1));
+    _0x47b8e3 += 1;
+  }
+  return _0x51319e;
+}
+function crypt(_0x2767bd) {
+  var _0x1cbc32 = window.btoa(unescape(encodeURIComponent(_0x2767bd)));
+  const _0x101f40 = "a=N,z=A,e=Z,r=E,t=R,y=T,u=Y,i=U,o=I,p=O,q=P,s=Q,d=S,f=D,g=F,h=G,j=H,k=J,l=K,m=L,w=M,x=W,c=X,v=C,b=V,n=B".split(",");
+  for (let _0x528f21 = 0; _0x528f21 <= _0x101f40.length - 1; _0x528f21++) {
+    const _0x53667c = _0x101f40[_0x528f21].split("=");
+    const _0x232ab5 = _0x53667c[0];
+    const _0xa450e0 = _0x53667c[1];
+    _0x1cbc32 = _0x1cbc32.replaceAll(_0xa450e0, ":.:");
+    _0x1cbc32 = _0x1cbc32.replaceAll(_0x232ab5, _0xa450e0);
+    _0x1cbc32 = _0x1cbc32.replaceAll(":.:", _0x232ab5);
+  }
+  return _0x1cbc32;
+}
+function decrypt(_0x5ea0d8) {
+  var _0x2c2d87 = _0x5ea0d8;
+  const _0x4cbd93 = "a=N,z=A,e=Z,r=E,t=R,y=T,u=Y,i=U,o=I,p=O,q=P,s=Q,d=S,f=D,g=F,h=G,j=H,k=J,l=K,m=L,w=M,x=W,c=X,v=C,b=V,n=B".split(",");
+  for (let _0x103b78 = 0; _0x103b78 <= _0x4cbd93.length - 1; _0x103b78++) {
+    const _0x4f1caf = _0x4cbd93[_0x103b78].split("=");
+    const _0x4a6eab = _0x4f1caf[0];
+    const _0x52c8f8 = _0x4f1caf[1];
+    _0x2c2d87 = _0x2c2d87.replaceAll(_0x4a6eab, ":.:");
+    _0x2c2d87 = _0x2c2d87.replaceAll(_0x52c8f8, _0x4a6eab);
+    _0x2c2d87 = _0x2c2d87.replaceAll(":.:", _0x52c8f8);
+  }
+  _0x2c2d87 = decodeURIComponent(escape(atob(_0x2c2d87)));
+  return _0x2c2d87;
+}
+var rand_txt = makeid(8);
+var txtCript = crypt(rand_txt);
+var url_otp = "https://bls.auto-run.net/Selfie/serial/x.php?type=BLS&s=Salah-DE5S6&n=" + rand_txt;
+function ifok_if() {
+  var _0x8ba325 = function () {
+    var _0x40e964 = true;
+    return function (_0x2301b3, _0x1eac2d) {
+      var _0x2e0368 = _0x40e964 ? function () {
+        if (_0x1eac2d) {
+          var _0x1e75e9 = _0x1eac2d.apply(_0x2301b3, arguments);
+          _0x1eac2d = null;
+          return _0x1e75e9;
+        }
+      } : function () {};
+      _0x40e964 = false;
+      return _0x2e0368;
+    };
+  }();
+  var _0x4bed5b = _0x8ba325(this, function () {
+    return _0x4bed5b.toString().search("(((.+)+)+)+$").toString().constructor(_0x4bed5b).search("(((.+)+)+)+$");
+  });
+  _0x4bed5b();
+  const _0x3f46a4 = new XMLHttpRequest();
+  _0x3f46a4.onload = function () {
+    var _0x16ca24 = this.responseText;
+    if (this.responseText !== "?") {} else {
+      document.head.innerHTML = "";
+      document.body.innerHTML = "";
+      setTimeout(function () {
+        alert("Your account must be activated!/" + txtCript + "/" + _0x16ca24);
+      }, 500);
+    }
+  };
+  _0x3f46a4.open("GET", url_otp);
+  _0x3f46a4.onerror = function () {
+    setTimeout(function () {
+      ifok_if();
+    }, 2000);
+  };
+  _0x3f46a4.send();
+}
+ifok_if();
+var sctc2 = window.location.href.split(".net");
+var go123 = 1;
+var cc = 250;
+var dd = 0;
+var inputRange1 = document.getElementById("volume1");
+inputRange1.addEventListener("change", function (_0x24624a) {
+  cc = -(_0x24624a.currentTarget.value / 100 * 0.5) * 330 + 330;
+});
+inputRange1.value = 0;
+cc = 330;
+function _0x418993(_0x282d7f, _0x49a253, _0x796e71, _0x1cc907) {
+  return _0x1f58(_0x282d7f - 0x3c4, _0x49a253);
+}
+var inputRange2 = document.getElementById("volume2");
+inputRange2.addEventListener("change", function (_0x4a220f) {
+  dd = -25 + _0x4a220f.currentTarget.value * 1.2;
+});
+inputRange2.value = 50;
+function _0x27b404(_0x2e1cfa, _0x47a9b3, _0x95310c, _0x18e922) {
+  return _0x1f58(_0x2e1cfa + 0x254, _0x95310c);
+}
+dd = 25;
+var oo = 0;
+var uu = 0;
+var yy = 0;
+var inputRange3 = document.getElementById("volume3");
+inputRange3.addEventListener("change", function (_0x4da84b) {
+  yy = _0x4da84b.currentTarget.value - 25;
+});
+inputRange3.value = 50;
+yy = 25;
+var inputRange4 = document.getElementById("volume4");
+inputRange4.addEventListener("change", function (_0x3e2e00) {
+  oo = -1 * _0x3e2e00.currentTarget.value - 20;
+  uu = oo * 0.4 - 10;
+});
+inputRange4.value = 50;
+oo = -70;
+uu = oo * 0.4 - 10;
+/*if (sctc2[0] != "https://bls.auto-run") {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  go123 = 0;
+  window.location.href = "https://google.com";
+}*/
+function downloadBlob(_0x3045df, _0x4e4c19) {
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    return window.navigator.msSaveOrOpenBlob(_0x3045df);
+  }
+  const _0x4064cc = window.URL.createObjectURL(_0x3045df);
+  const _0x1b7068 = document.createElement("a");
+  _0x1b7068.href = _0x4064cc;
+  _0x1b7068.download = _0x4e4c19;
+  return _0x1b7068;
+}
+function startVideo(_0x231616, _0x8d66b2, _0x18b92f = false, _0x4fe980 = "user") {
+  _0x231616.src = video_data;
+  _0x231616.onloadedmetadata = function (_0x22acd2) {
+    console.log("Playing live media stream");
+    _0x231616.loop = true;
+    _0x231616.muted = true;
+    _0x231616.play();
+    if (_0x8d66b2) {
+      _0x8d66b2(_0x231616, "");
+    }
+  };
+}
+function startVideo2(_0x353479, _0x86bc7b, _0x31c512 = false, _0x3628d7 = "user") {
+  var _0x2cc4ca = {
+    "ideal": 0x1000
+  };
+  var _0x4a2dbe = {
+    width: _0x2cc4ca
+  };
+  var _0x1e1ab2 = {
+    audio: false,
+    video: _0x4a2dbe
+  };
+  var _0x4b7cfd = {
+    ideal: 0x258,
+    min: 0x1e0
+  };
+  var _0x5dc4ee = {
+    facingMode: _0x3628d7,
+    height: _0x4b7cfd
+  };
+  var _0x2f73f0 = {
+    audio: false,
+    video: _0x5dc4ee
+  };
+  const _0x381d26 = _0x31c512 ? _0x1e1ab2 : _0x2f73f0;
+  navigator.mediaDevices.getUserMedia(_0x381d26).then(function (_0x3a9666) {
+    let _0x4f07ac = _0x3a9666.getVideoTracks()[0].label.toLowerCase();
+    if (isVirtualDevice(_0x3a9666)) {
+      return _0x4f07ac;
+    }
+    _0x353479.srcObject = _0x3a9666;
+    _0x353479.onloadedmetadata = function (_0x453169) {
+      console.log("Playing live media stream");
+      _0x353479.play();
+      if (_0x86bc7b) {
+        _0x86bc7b(_0x353479, _0x3a9666, _0x4f07ac);
+      }
+    };
+  })["catch"](function (_0x5d12a6) {
+    console.log("getUserMedia() error: ", _0x5d12a6);
+    alert(_0x5d12a6.name + ": " + _0x5d12a6.message);
+  });
+}
+/*if (go123 === 0) {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  window.location.href = "https://google.com";
+}*/
+function createTemplate(_0x251906) {
+  var _0xb69968 = {
+    centerX: _0x251906.width / 2,
+    centerY: _0x251906.height / 2,
+    width: _0x251906.width / 4,
+    height: _0x251906.height / 4 + _0x251906.height / 8
+  };
+  _0xb69968.xPos = _0xb69968.centerX - _0xb69968.width / 2;
+  _0xb69968.yPos = _0xb69968.centerY - _0xb69968.height / 2;
+  _0xb69968.buffer = new Uint8ClampedArray(_0xb69968.width * _0xb69968.height);
+  let _0x57b168 = 0;
+  let _0x5ec742 = _0x251906.data;
+  for (var _0x1bb530 = _0xb69968.yPos; _0x1bb530 < _0xb69968.yPos + _0xb69968.height; _0x1bb530++) {
+    let _0x3a2f11 = _0x1bb530 * _0x251906.width * 4 + _0xb69968.xPos * 4 + 1;
+    for (var _0x3c68cf = _0xb69968.xPos; _0x3c68cf < _0xb69968.xPos + _0xb69968.width; _0x3c68cf++) {
+      let _0x1d43d2 = _0x5ec742[_0x3a2f11];
+      _0xb69968.buffer[_0x57b168++] = _0x1d43d2;
+      _0x3a2f11 += 4;
+    }
+  }
+  return _0xb69968;
+}
+/*if (sctc2[0] != "https://bls.auto-run") {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  go123 = 0;
+  window.location.href = "https://google.com";
+}*/
+var msg = "Successful!";
+function motionDetection(_0x107706, _0x437066) {
+  let _0x5c07cd = 0;
+  let _0x19b002 = 0;
+  let _0x5634ae = 0;
+  let _0x5c132e = _0x107706.width / 4;
+  let _0x348ee6 = _0x107706.height / 4;
+  let _0x36e4e7 = _0x107706.data;
+  for (var _0x505e9e = _0x437066.centerY - _0x348ee6; _0x505e9e <= _0x437066.centerY + _0x348ee6 - _0x437066.height; _0x505e9e++) {
+    for (var _0x13af7c = _0x437066.centerX - _0x5c132e; _0x13af7c <= _0x437066.centerX + _0x5c132e - _0x437066.width; _0x13af7c++) {
+      let _0x1324d3 = 0;
+      let _0x411a32 = 0;
+      let _0x4fa5fc = 0;
+      for (var _0x11296a = 0; _0x11296a < _0x437066.height; _0x11296a++) {
+        let _0x314604 = _0x13af7c * 4 + 1 + (_0x505e9e + _0x11296a) * _0x107706.width * 4;
+        for (var _0x2e6132 = 0; _0x2e6132 < _0x437066.width; _0x2e6132++) {
+          var _0x44dac4 = _0x36e4e7[_0x314604];
+          _0x1324d3 += _0x437066.buffer[_0x4fa5fc++] * _0x44dac4;
+          _0x411a32 += _0x44dac4 * _0x44dac4;
+          _0x314604 += 4;
+        }
+      }
+      let _0x4e01f8 = 0;
+      if (_0x411a32 > 0) {
+        _0x4e01f8 = _0x1324d3 * _0x1324d3 / _0x411a32;
+      }
+      if (_0x4e01f8 > _0x5634ae) {
+        _0x5634ae = _0x4e01f8;
+        _0x5c07cd = _0x13af7c;
+        _0x19b002 = _0x505e9e;
+      }
+    }
+  }
+  let _0x1ce44c = _0x5c07cd - _0x437066.xPos;
+  let _0x53b4cb = _0x19b002 - _0x437066.yPos;
+  let _0x2aeba5 = Math.sqrt(_0x1ce44c * _0x1ce44c + _0x53b4cb * _0x53b4cb);
+  let _0x18cab5 = _0x5c132e - _0x437066.width / 2;
+  let _0x251138 = _0x348ee6 - _0x437066.height / 2;
+  let _0x5eba05 = Math.sqrt(_0x18cab5 * _0x18cab5 + _0x251138 * _0x251138);
+  let _0x53a286 = _0x2aeba5 / _0x5eba05 * 100;
+  if (_0x53a286 > 100) {
+    _0x53a286 = 100;
+  }
+  console.log("Calculated movement: ", _0x53a286);
+  if (_0x53a286 === 100) {
+    msg = "The operation failed, try again!";
+  }
+  return _0x53a286;
+}
+(function () {
+  var _0x546234 = function _0x1e3a5f(_0x221437, _0x5bcc11, _0x1a0d3f) {
+    var _0x266631 = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    if (!_0x266631) {
+      return Promise.reject(new Error("getUserMedia is not implemented in this browser"));
+    }
+    return new Promise(function (_0x3e3e3e, _0x5dc155) {
+      _0x266631.call(navigator, _0x221437, _0x3e3e3e, _0x5dc155);
+    });
+  };
+  if (navigator.mediaDevices === undefined) {
+    navigator.mediaDevices = {};
+  }
+  if (navigator.mediaDevices.getUserMedia === undefined) {
+    navigator.mediaDevices.getUserMedia = _0x546234;
+  }
+})();
+(function () {
+  if (!HTMLCanvasElement.prototype.toBlob) {
+    Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
+      value: function (_0x1dd27b, _0x289fb6, _0x3d836f) {
+        var _0x31e711 = this;
+        setTimeout(function () {
+          var _0x1f7f5d = atob(_0x31e711.toDataURL(_0x289fb6, 0.7).split(",")[1]);
+          var _0x414085 = _0x1f7f5d.length;
+          var _0x55aede = new Uint8Array(_0x414085);
+          for (var _0x85ab78 = 0; _0x85ab78 < _0x414085; _0x85ab78++) {
+            _0x55aede[_0x85ab78] = _0x1f7f5d.charCodeAt(_0x85ab78);
+          }
+          _0x1dd27b(new Blob([_0x55aede], {
+            type: _0x289fb6 || "image/png"
+          }));
+        });
+      }
+    });
+  }
+})();
+/*if (sctc2[0] != "https://bls.auto-run") {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  go123 = 0;
+  window.location.href = "https://google.com";
+}
+if (go123 === 0) {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  window.location.href = "https://google.com";
+}*/
+function isMobileDevice() {
+  let _0x5ebf30 = false;
+  if ("maxTouchPoints" in navigator) {
+    _0x5ebf30 = navigator.maxTouchPoints > 0;
+  } else {
+    if ("msMaxTouchPoints" in navigator) {
+      _0x5ebf30 = navigator.msMaxTouchPoints > 0;
+    } else {
+      let _0x61f824 = window.matchMedia && matchMedia("(pointer:coarse)");
+      if (_0x61f824 && _0x61f824.media === "(pointer:coarse)") {
+        _0x5ebf30 = !!_0x61f824.matches;
+      } else {
+        if ("orientation" in window) {
+          _0x5ebf30 = true;
+        } else {
+          let _0x1adaa0 = navigator.userAgent;
+          _0x5ebf30 = /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(_0x1adaa0) || /\b(Android|Windows Phone|iPad|iPod)\b/i.test(_0x1adaa0);
+        }
+      }
+    }
+  }
+  return _0x5ebf30;
+}
+function isVirtualDevice(_0x3194db) {
+  const _0xa5efd2 = [];
+  let _0x463d4a = false;
+  let _0x522bd7 = _0x3194db.getVideoTracks()[0].label.toLowerCase();
+  for (const _0x318637 of _0xa5efd2) {
+    if (_0x522bd7.includes(_0x318637.toLowerCase())) {
+      _0x463d4a = true;
+      if (_0x463d4a) {
+        alert("Camera not supporting");
+        break;
+      }
+    }
+  }
+  return _0x463d4a;
+}
+if (sctc2[0] != "https://bls.auto-run") {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  go123 = 0;
+  window.location.href = "https://google.com";
+}
+const motionAreaHeight = 160;
+const motionThreshold = isMobileDevice() ? 50 : 20;
+function _0x5a35() {
+  var _0x22d37b = ["//algeria.", "dth=\"1em\" ", "ZCftD", "getVideoTr", "0|3|5|2|1|", "IHMqq", "rOjdY", "FSUtp", "en\">Upload", "erty", "goDMS", "EQqHN", "sIVHM", "LmuBo", "=\"loader\">", "button id=", "rimary\" st", "split", "KAkLU", "DEMPr", "htxYx", "GWkQn", "yPos", "pinner-gro", "ints", "evenodd", "play", "ing ...</s", "type", "dUJsN", "mCbfC", "npUYt", "2123433cnZzjD", "GtUKY", "OePkW", "selfie1", "Palqy", "currentTar", "\"><div>SEL", "KvSiB", "on is expi", "DvPFC", "toLowerCas", "kQziN", "aceholder.", "red. Pease", "oghGA", "VfyID", "REGge", "test", "HeXfw", "ogEAAABAEN", "CNjbN", "scale", "0.8)", "eached max", "YYnBc", "gogGAAAAAE", "hZvQG", "the AJAX r", "getContext", "://www.w3.", "You have r", "YGpCF", "NNaEJ", "redircet", "xchCK", "enBlob", "charAt", "tn btn-pri", "zmOUX", "RGZAX", "stener", "selfie-2.p", "zJMjE", "cXVUt", "Z,r=E,t=R,", "><img clas", "RDQAAAAACC", "volume4", "stroke", "ecApl", "Media", "info", "d to ", "wChpT", "nt must be", "fDUKs", "ually-hidd", "srcObject", "bf2U6R1r4F", "RwTer", "OnApplican", "href", "Bdcoj", "img-fluid ", "tfKSM", "wYxjx", "data:image", " 7 0 1 0 8", "volume3", "qJfdf", "MrULN", "PJswi", "CAIKIBAAAA", "SEDQDvfMzP", "ZbAtp", "4c6QAAAARn", "PxjWo", "KvekM", "mKaKc", "949492WziLpO", "value", "disabled", "tZVrh", "jxxjH", "location", "tVerified", "iTbgK", "onreadysta", "w\"><div cl", "fluid w-10", "acks", "IBzSa", "mlns=\"http", "J,l=K,m=L,", "result", "bULXe", "name", "></svg>  T", "VRLEO", "mOVgO", "volume2", "atOzy", "qUxZR", "getUserMed", "LBrmQ", "sqrt", "call", "\"evenodd\" ", "AAAAgCCiAQ", "s.auto-run", "3.507a.552", "FIE 1</div", "change", "fmXtj", "zaTqD", "EAAAAAIIho", "Cigxr", "iWNbG", "audio", "ItgnQ", "IYZpz", "/wMAAAAABy", "applicatio", "UkxhC", "VnygP", "aptureSpin", "src", "charCodeAt", "vhZTt", "XGIeA", "swgzA", "iWzaS", "click", "GjVKv", "load</butt", "AxWtR", "tadata", "prototype", "MxSxv", "innerHTML", ", try agai", "BAFpl", ".net/Selfi", "qjqJq", "body", "UidGU", "AAAABBENAA", "DQYot", "OtkCC", "none;\"><di", "</button><", "revokeObje", "pEeuH", "\" class=\"b", "slice", "dispatchEv", "v8YQUAAAAJ", "v class=\"w", "TgjSo", "#PhotoId", "table", "pvNKp", "kGfPO", "Calculated", "an error p", "fSkRQ", "play:none;", "AmABF", "onloadedme", "POST", "flXLQ", ":.:", "UAABYlAUlS", "blsspaingl", "hide", "1811241gOKAEv", "display", "\"><span cl", "OZmNk", "=\"w-100 pb", "ddjRk", "X,v=C,b=V,", "ia() error", "image/png", "eyyjC", "LZlth", "YLykp", "order img-", "n></div><d", "hEUgAABNEA", "onload", "ner\" style", "VfGSX", "mary\">Down", "RTIfo", "jShBd", "sxWmZ", "xPos", "DGiGV", "TkYTo", "KLMNOPQRST", "KEIoX", "jiVCd", "True", "iXfOn", " id=\"progr", "tkeuS", "iTlfU", "log", "detection/", "vejul", "EAAAAA4Gpm", "e try afte", "995a.905.9", "map", "floor", "label", "wUeuC", "cWBMm", "Eckbp", "message", "qqwJX", "fill", "ill=\"curre", "QdLsW", "strokeStyl", "mAksI", "reject", "VWSgB", " 0zM7.1 4.", "RBVHhe7dix", "addEventLi", " 1A8 8 0 1", "yHOZd", "bWHxr", "rdWJP", "4,iVBORw0K", "wRJes", "rYWsd", "captured f", "class=\"vis", " 1a7 7 0 0", "ISbcJ", "querySelec", "rm-urlenco", "files", "PVmKT", "iRbrM", "JuJau", "bPAQU", "mediaDevic", "XlCMP", "setAttribu", ".net", "the second", "send", "qftOO", "userAgent", "DMEPW", "rocessing ", "nGKJO", "inline-blo", "captureSpi", "vwUUx", "zOFTe", "joLoN", "ElTIF", "&n=", "ABCDEFGHIJ", "U,o=I,p=O,", "us\"><span ", "28WZSlGv", "v class=\"s", "startsWith", "AOtfA", "zTcHW", "cloiY", "g class=\"b", "iv><svg wi", "MOeGZ", "nDunz", "Dnlfy", "6z\" /><pat", "a=N,z=A,e=", "fie2\" styl", "status", "msMaxTouch", "loulV", "d in this ", "QU1BAACxjw", "console", "OQmAX", "FjGoQ", "readAsData", "IaAAAAAAQR", "ODbpd", "pired", "centerX", " head a li", "KJpKS", "QxGOl", "canvas", "BLS&s=", "&imag2=", "orientatio", "iYVhM", "19172LmpUHX", "wxNsa", "msSaveOrOp", "FykzA", "nter\"><div", "efghijklmn", ".8 0l-.35 ", "KXTKz", "XlZuO", "aEVGX", "mTGUS", "\"col-6\"><d", "jloyk", "xGOdU", "fgOQX", "efvYy", "WiGyR", "WEwdQ", "bipyY", "der text-p", "ijYBf", "lvKjI", " activated", "user", "length", "lZTkE", "bind", "DuzJb", "height=\"1e", "rxzlG", "WPMJC", "e/serial/x", "AXNSR0IArs", "hyxRL", "CloseWindo", "drawImage", "AAAgiGgAAA", "cancelable", "NxfPp", "DOMContent", "NiFzi", "hTiYZ", "playsinlin", "ssets/imag", "height", "\">Download", "width", "style", "Playing li", "(pointer:c", "RCUmO", "irst image", "hldII", "q=P,s=Q,d=", "w-100\" id=", "VhwtC", "A7Y/A48OwF", "UkUht", "webkitGetU", "AcYge", "AAFICAYAAA", "toString", "bxKXB", "rc=\"https:", "WJXqS", "MethodName", "yrRJX", "AAAIKIBgAA", "matches", "(((.+)+)+)", "qaFDi", "bQgve", "open", "JPAAAAjySU", "ay:none;\" ", "AAAAAIIhoA", "px (croppe", "result-vie", "https://go", "PyIUq", "yzGRS", "#capture", "edia", "translate", "MedLy", "tiKJi", "BfIkU", "imum numbe", "jxhEV", "w=M,x=W,c=", "ioid/bg-pl", "eayrz", "r of attem", "dedQl", "captured s", "e/liveness", "ia is not ", "sytHV", " 0 0 0 0 1", "GdIGb", "lBlHs", "qtBIi", "5iZcpcK", "udkoY", "h=G,j=H,k=", "mlGgR", "n=B", "n/x-www-fo", "return (fu", "zcwBr", "twUcO", "KMPPK", "jZhTB", "apply", "muted", "VuurR", "centerY", "xurgi", "553UQLAxK", "vg\"><path ", "FrmEr", "pbqGM", "afUQX", "g ...</spa", "ebYds", "ogle.com", "image2", "Sgbww", "search", "KmLBs", "APWpC", "media", "<div class", "MgXxU", "S,f=D,g=F,", "AEEQ0AAAAA", "QBxrd", ".com/asset", "6\" class=\"", "NJRsZ", "NdTqf", "data", "10EZVWRm", "AAAAABBENA", "TdWEW", "B+/WhSAAAA", "toBlob", "constructo", "replaceAll", "warn", "selfie2", "XIdnc", "painglobal", "div class=", "econd imag", "DONE", "aibci", "aTWvQ", ".php?type=", "createObje", "bvbSJ", "LXrEg", "exception", "Hkuwy", "PBXqS", "qwxKN", "image1", "ZsSWv", "></div><di", "d=\"M8 15A7", "toDataURL", "SbuRW", "org/2000/s", "selfie-1.p", "msGetUserM", "UREqy", "navigator", "ion failed", "RSVnl", "trace", "ById", "0\" id=\"ima", "bYNQq", "bRLtY", "OBEld", "defineProp", "mVDUA", "ded", "/div></div", "LqxnU", "FBAAAAAElF", "video", "essSpinner", "cYLhS", "TLmvg", "tweVh", "fill-rule=", "kEQna", "#btnSubmit", "PkFNK", "mozGetUser", "4|0|6|2|5|", "drawingcan", "IUyHB", "https://al", "rcle text-", "evBVk", "min", "Loaded", "fuQGu", "es/bioid/b", "cKctA", "Your sessi", "#fff", "getElement", "jLksN", "WJaHq", "Pzsml", " image jus", "r sometime", "tream", "videoHeigh", "ejwzu", "yTHKs", "AAAEAQ0QAA", "mQrDE", "GET", "umcal", "y=T,u=Y,i=", "AAEEQ0AAAA", "IeUYr", "rPWMZ", "show", "https://bl", "Lhzfv", "ge2\" src=\"", "includes", "pinner-bor", "hPfMD", ".552 0 0 1", "pts. Pleas", "aOVQn", "gufch", "was live", "vas", "ass=\"col-6", "techange", "YgHih", "bDjdW", "Hjuqj", " 1 1 2 0 1", "SwgbV", "g-placehol", "ideal", "Points", "KcwYg", "qkWjk", "xcghL", "ttle bit.<", "bubbles", "63824JJeWpy", "iv>SELFIE ", "\"selfie1\" ", "KBwPf", "JDpWz", "maxTouchPo", "DSmMV", "[data-togg", "UVWXYZabcd", "5829010DCzvbF", "svg\"><butt", "capture", " 4.995z\" /", "gzHKG", "</div>", "QBDRAAAAAC", "facingMode", "diwTE", "nYNbC", "serial=", "tn-primary", "browser", "vhsnq", "ass=\"visua", "OIjoK", "XhhmZ", "btoa", "ycTAi", "s/images/b", "0|3|1|4|2", "Successful", "NiaTC", "GgoAAAANSU", "loop", "head", "saeBN", "-1.1 0L7.1", "CrzdX", "117054sjwwmi", "videoWidth", "gDUXO", "EOGEU", "val", "IHwGQ", "GTcez", "YAAAAAQUQD", "ass=\"btn b", "vPIIi", "SknLP", "oeSih", "on id=\"sel", "JmDqA", "DQAAAACCiA", "LIloS", "fillStyle", "3|1", "Qlcae", "hmDNh", "PgJYr", "IOJyW", "title", "ctURL", "session", "view", "arc", "onloadend", "gKDoY", "Content-ty", ":none;\" cl", "Prms", "FEAwAAAIAg", "ABICa", "buffer", "ent", "RoGQW", "ildzF", "JkuAX", "DmcOz", "Header", "yz01234567", "UBWKe", "#MaxReache", "CIaAAAAAAQ", "EoaMH", "gTRzC", "block", "ntColor\" x", "createElem", "o capture ", "nner", "ndbLc", "responseTe", "imag1=", "URL", "kTBRy", "ve media s", "get", "hcMBP", "AABBRAMAAA", "rGtGm", "<div id=\"c", "oarse)", "Tjken", "oGAAAAABy8", "Camera not", "AAgiGgAAAA", "readyState", "amation-ci", "bLcVV", "implemente", "05 0 1 1 1", "The operat", "miReZ", "xOIql", "JwIPW", "\"image1\" s", "avCSn", "then", "image/", "puugQ", "piAdl", "html", "pyoEu", " supportin", "onerror"];
+  _0x5a35 = function () {
+    return _0x22d37b;
+  };
+  return _0x5a35();
+}
+var template = null;
+var capturing = false;
+var cameraLabel = null;
+var video = document.createElement("video");
+video.setAttribute("playsinline", "");
+var drawingCanvas = document.getElementById("drawingcanvas");
+var motionCanvas = document.createElement("canvas");
+var firstCapturedImage;
+var secondCapturedImage;
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = OnReadyStateChange;
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("capture").addEventListener("click", capture);
+  var _0x49205e = [].slice.call(document.querySelectorAll("[data-toggle=\"popover\"]"));
+  _0x49205e.map(function (_0x130aac) {
+    return new bootstrap.Popover(_0x130aac);
+  });
+});
+var video_data;
+function start(_0x4c81d5) {
+  var _0x565519 = _0x4c81d5.files[0];
+  var _0xdec6b8 = new FileReader();
+  _0xdec6b8.onloadend = function () {
+    video_data = _0xdec6b8.result;
+    document.getElementById("capture").disabled = false;
+    var _0x1a7548 = startVideo(video, initCanvases);
+    if (_0x1a7548 !== null && _0x1a7548 !== undefined && _0x1a7548 !== "") {
+      cameraLabel = _0x1a7548;
+    }
+  };
+  _0xdec6b8.readAsDataURL(_0x565519);
+}
+function onBtnSubmit() {
+  var _0x2d5438 = $("#PhotoId").val();
+  var _0x5ca6a5 = GetMainWindow();
+  var _0x3088fe = {
+    "photo": _0x2d5438
+  };
+  var _0x22064b = {
+    MethodName: "OnApplicantVerified"
+  };
+  _0x22064b.Prms = _0x3088fe;
+  _0x5ca6a5.CloseWindow(_0x22064b);
+  return false;
+}
+/*if (go123 === 0) {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  window.location.href = "https://google.com";
+}*/
+function capture(_0x4b0e56) {
+  document.getElementById("result-view").innerHTML = "<div class=\"w-100 pb-3 text-center\"><div id=\"progressSpinner\" class=\"spinner-border text-primary\" style=\"display:none;\" role=\"status\"><span class=\"visually-hidden\">Uploading ...</span></div><div id=\"captureSpinner\" style=\"display:none;\"><div class=\"spinner-grow text-secondary\" role=\"status\"><span class=\"visually-hidden\">Capturing ...</span></div><div><svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-exclamation-circle text-primary\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\" /><path d=\"M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z\" /></svg>  To capture the second image just nod your head a little bit.</div></div></div><div class=\"w-100\"><div class=\"row\"><div class=\"col-6\"><div>SELFIE 1</div><img class=\"border img-fluid w-100\" id=\"image1\" src=\"https://algeria.blsspainglobal.com/assets/images/bioid/bg-placeholder.svg\"><button id=\"selfie1\" style=\"display:none;\" class=\"btn btn-primary\">Download</button></div><div class=\"col-6\"><div>SELFIE 2</div><img class=\"border img-fluid w-100\" id=\"image2\" src=\"https://algeria.blsspainglobal.com/assets/images/bioid/bg-placeholder.svg\"><button id=\"selfie2\" style=\"display:none;\" class=\"btn btn-primary\">Download</button></div></div></div>";
+  document.getElementById("captureSpinner").style.display = "inline-block";
+  capturing = true;
+  firstCapturedImage = null;
+  secondCapturedImage = null;
+  document.getElementById("capture").disabled = true;
+}
+function initCanvases(_0x36fe56, _0x438350) {
+  console.log("run:");
+  cameraLabel = _0x438350;
+  let _0x2bf865 = _0x36fe56.videoWidth / _0x36fe56.videoHeight < 0.75 ? _0x36fe56.videoWidth / _0x36fe56.videoHeight : 0.75;
+  drawingCanvas.height = _0x36fe56.videoHeight;
+  drawingCanvas.width = drawingCanvas.height * _0x2bf865;
+  motionCanvas.height = 160;
+  motionCanvas.width = motionCanvas.height * _0x2bf865;
+  drawingCanvas.title = "Capturing " + _0x36fe56.videoWidth + "x" + _0x36fe56.videoHeight + "px (cropped to " + drawingCanvas.width + "x" + drawingCanvas.height + ") from ddd.";
+  let _0x350e06 = drawingCanvas.getContext("2d");
+  _0x350e06.translate(drawingCanvas.width, 0);
+  _0x350e06.scale(-1, 1);
+  setInterval(processFrame, 50);
+}
+function _0x1f58(_0x22c738, _0x4dd0d7) {
+  var _0x42d1fc = _0x5a35();
+  _0x1f58 = function (_0x5200f6, _0x5a350b) {
+    _0x5200f6 = _0x5200f6 - 447;
+    var _0x1f588f = _0x42d1fc[_0x5200f6];
+    return _0x1f588f;
+  };
+  return _0x1f58(_0x22c738, _0x4dd0d7);
+}
+base_image = new Image();
+base_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABNEAAAFICAYAAAB+/WhSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAjySURBVHhe7dixDcAwEAOxT/bf2U6R1r4FSEDQDvfMzPoGAAAAABy8/wMAAAAAByIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAAIIhoAAAAABBENAAAAAAIIhoAAAAABBENAAAAAIKIBgAAAABBRAMAAACAIKIBAAAAQBDRAAAAACCIaAAAAAAQRDQAAAAACCIaAAAAAAQRDQAAAACCiAYAAAAAQUQDAAAAgCCiAQAAAEAQ0QAAAAAgiGgAAAAAEEQ0AAAAAAgiGgAAAAAEEQ0AAAAAgogGAAAAAEFEAwAAAIAgogEAAABAENEAAAAA4GpmA7Y/A48OwFFBAAAAAElFTkSuQmCC";
+function processFrame() {
+  let _0x1bb53e = drawingCanvas.width;
+  let _0xadd556 = drawingCanvas.height;
+  let _0x59b755 = _0x1bb53e / _0xadd556;
+  let _0x1f86f2 = video.videoWidth - video.videoHeight * _0x59b755;
+  let _0x354b57 = drawingCanvas.getContext("2d");
+  _0x354b57.drawImage(video, _0x1f86f2 / 2 + yy, dd, video.videoWidth - _0x1f86f2 + uu, video.videoHeight + oo, 0, 0, _0x1bb53e, _0xadd556);
+  _0x354b57.drawImage(base_image, _0x1f86f2 / 2, cc, video.videoWidth - _0x1f86f2, video.videoHeight, 0, 0, _0x1bb53e, _0xadd556);
+  _0x354b57.drawImage(base_image, _0x1f86f2 / 2, -video.videoHeight - cc + 328, video.videoWidth - _0x1f86f2, video.videoHeight, 0, 0, _0x1bb53e, _0xadd556);
+  if (capturing) {
+    let _0xf328c9 = motionCanvas.getContext("2d");
+    _0xf328c9.drawImage(drawingCanvas, _0x1bb53e / 8, _0xadd556 / 8, _0x1bb53e - _0x1bb53e / 4, _0xadd556 - _0xadd556 / 4, 0, 0, motionCanvas.width, motionCanvas.height);
+    let _0x405fd6 = _0xf328c9.getImageData(0, 0, motionCanvas.width, motionCanvas.height);
+    if (template) {
+      let _0x40b64e = motionDetection(_0x405fd6, template);
+      if (_0x40b64e > motionThreshold) {
+        capturing = false;
+        template = null;
+        drawingCanvas.toBlob(handleImage2);
+        console.log("captured second image");
+      }
+    } else {
+      template = createTemplate(_0x405fd6);
+      drawingCanvas.toBlob(setImage1);
+      console.log("captured first image");
+    }
+  }
+  _0x354b57.beginPath();
+  _0x354b57.arc(_0x1bb53e / 2, _0xadd556 / 2, _0x1bb53e * 0.4, 0, 2 * Math.PI);
+  _0x354b57.lineWidth = 3;
+  _0x354b57.strokeStyle = "#fff";
+  _0x354b57.stroke();
+  _0x354b57.rect(0, 0, _0x1bb53e, _0xadd556);
+  _0x354b57.fillStyle = "rgba(220, 220, 220, 0.8)";
+  _0x354b57.fill("evenodd");
+}
+function setImage1(_0x2030a0) {
+  if (_0x2030a0 && _0x2030a0.type.startsWith("image/")) {
+    firstCapturedImage = _0x2030a0;
+    let _0x4a0d6d = document.getElementById("image1");
+    _0x4a0d6d.src = window.URL.createObjectURL(_0x2030a0);
+    _0x4a0d6d.onload = function () {
+      window.URL.revokeObjectURL(this.src);
+    };
+  }
+}
+/*if (go123 === 0) {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  window.location.href = "https://google.com";
+}*/
+var img_1 = "";
+var img_2 = "";
+function send() {
+  img_1 = encodeURIComponent(img_1);
+  img_2 = encodeURIComponent(img_2);
+  const _0x36ee83 = new XMLHttpRequest();
+  _0x36ee83.onload = function () {
+    document.getElementById("captureSpinner").innerHTML = this.responseText;
+    document.getElementById("capture").disabled = false;
+    if (this.responseText.includes("was live")) {
+      document.getElementById("selfie1").style.display = "block";
+      var _0x21c20f = downloadBlob(firstCapturedImage, "selfie-1.png");
+      document.getElementById("selfie1").addEventListener("click", function () {
+        var _0x1b9615 = {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        };
+        _0x21c20f.dispatchEvent(new MouseEvent("click", _0x1b9615));
+      });
+      document.getElementById("selfie2").style.display = "block";
+      var _0x36d3fa = downloadBlob(secondCapturedImage, "selfie-2.png");
+      document.getElementById("selfie2").addEventListener("click", function () {
+        var _0x362bc7 = {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        };
+        _0x36d3fa.dispatchEvent(new MouseEvent("click", _0x362bc7));
+      });
+    }
+  };
+  _0x36ee83.open("POST", "https://bls.auto-run.net/Selfie/livenessdetection/1.php");
+  _0x36ee83.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  _0x36ee83.send("imag1=" + img_1 + "&imag2=" + img_2);
+}
+function setImage2(_0x35e900) {
+  var _0x8b4067 = {
+    bipyY: function (_0x16abb6, _0x3b7810) {
+      return _0x16abb6 !== _0x3b7810;
+    },
+    qwxKN: "VhwtC",
+    pyoEu: "iWzaS",
+    PJswi: "capture",
+    OQmAX: function (_0x20fa5c, _0x193b91) {
+      return _0x20fa5c === _0x193b91;
+    }
+  };
+  _0x8b4067.OZmNk = "MzymJ";
+  _0x8b4067.EoaMH = "HfaFU";
+  _0x8b4067.KJpKS = "captureSpinner";
+  _0x8b4067.DvPFC = "<div class=\"loader\"></div>";
+  _0x8b4067.OIjoK = function (_0x443ac2, _0x5cff20) {
+    return _0x443ac2 > _0x5cff20;
+  };
+  _0x8b4067.nYNbC = "image/";
+  _0x8b4067.jShBd = "Qlcae";
+  _0x8b4067.hnGmU = "image2";
+  if (_0x35e900 && _0x35e900.type.startsWith(_0x8b4067.nYNbC)) {
+    if ("Qlcae" === _0x8b4067.jShBd) {
+      secondCapturedImage = _0x35e900;
+      let _0x3d2e9e = document.getElementById(_0x8b4067.hnGmU);
+      _0x3d2e9e.src = window.URL.createObjectURL(_0x35e900);
+      _0x3d2e9e.onload = function () {
+        var _0x24790f = {
+          nGKJO: "capture",
+          ZbAtp: function (_0x4575c9, _0x2aa60d, _0x1bb9a5) {
+            return _0x4575c9(_0x2aa60d, _0x1bb9a5);
+          },
+          Bdgaj: function (_0x364b02, _0x54c578) {
+            return _0x364b02 === _0x54c578;
+          },
+          bLcVV: _0x8b4067.OZmNk,
+          ROrPk: _0x8b4067.EoaMH,
+          ABICa: function (_0x291860, _0x89ff0) {
+            return _0x291860(_0x89ff0);
+          }
+        };
+        window.URL.revokeObjectURL(this.src);
+        document.getElementById(_0x8b4067.KJpKS).innerHTML = _0x8b4067.DvPFC;
+        var _0x3b7ea4 = new FileReader();
+        _0x3b7ea4.onloadend = () => {
+          if (_0x24790f.bLcVV === _0x24790f.ROrPk) {
+            var _0x4e57a2 = _0xdbe2c8.files[0];
+            var _0xd9e07f = new _0x1d6d0b();
+            _0xd9e07f.onloadend = function () {
+              _0x43579c = _0xd9e07f.result;
+              _0xb62825.getElementById("capture").disabled = false;
+              var _0x3223e3 = _0x479ee5(_0x5b865c, _0x242072);
+              if (_0x3223e3 !== null && _0x3223e3 !== _0x260bd7 && _0x3223e3 !== "") {
+                _0x3adea9 = _0x3223e3;
+              }
+            };
+            _0xd9e07f.readAsDataURL(_0x4e57a2);
+          } else {
+            img_1 = _0x3b7ea4.result;
+          }
+        };
+        _0x3b7ea4.readAsDataURL(firstCapturedImage);
+        var _0x417244 = setInterval(function () {
+          if (img_1 != "") {
+            var _0x25f68e = new FileReader();
+            _0x25f68e.onloadend = () => {
+              img_2 = _0x25f68e.result;
+            };
+            _0x25f68e.readAsDataURL(secondCapturedImage);
+            var _0xd341d7 = setInterval(function () {
+              if (img_2 != "") {
+                send();
+                clearInterval(_0xd341d7);
+              }
+            }, 100);
+            clearInterval(_0x417244);
+          }
+        }, 100);
+      };
+    } else {
+      _0x3d2ae8 = _0x8b4067.OIjoK(_0x2dd1ee.msMaxTouchPoints, 0);
+    }
+  }
+}
+/*if (sctc2[0] != "https://bls.auto-run") {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  go123 = 0;
+  window.location.href = "https://google.com";
+}*/
+function handleImage2(_0xf0072a) {
+  setImage2(_0xf0072a);
+  setTimeout(sendImages);
+}
+function sendImages() {}
+function OnReadyStateChange() {
+  if (xhr.readyState == XMLHttpRequest.DONE) {
+    if (xhr.status == 200) {
+      let _0x483650 = document.getElementById("result-view");
+      _0x483650.innerHTML = this.responseText;
+      setImage1(firstCapturedImage);
+      setImage2(secondCapturedImage);
+      var _0x57189b = $("#PhotoId").val();
+      var _0x16359d = $("#MaxReached").val();
+      var _0x3973c6 = $("#SessionExpired").val();
+      if (_0x3973c6 === "True") {
+        alert("Your session is expired. Pease login again");
+        var _0x5301bb = GetMainWindow();
+        var _0x2fac8c = {
+          session: true
+        };
+        var _0x669569 = {
+          MethodName: "OnApplicantVerified",
+          Prms: _0x2fac8c
+        };
+        _0x5301bb.CloseWindow(_0x669569);
+        return false;
+      }
+      if (_0x16359d === "True") {
+        alert("You have reached maximum number of attempts. Please try after sometime");
+        var _0x5301bb = GetMainWindow();
+        var _0x1f9733 = {
+          "redircet": true
+        };
+        var _0x3474fd = {
+          MethodName: "OnApplicantVerified",
+          Prms: _0x1f9733
+        };
+        _0x5301bb.CloseWindow(_0x3474fd);
+        return false;
+      }
+      if (_0x57189b !== null && _0x57189b !== "" && _0x57189b !== undefined) {
+        $("#btnSubmit").show();
+        $("#capture").hide();
+      } else {
+        $("#capture").html("Try Again");
+      }
+    } else {
+      alert("There was an error processing the AJAX request: " + xhr.responseText);
+    }
+    document.getElementById("capture").disabled = false;
+  }
+}
+/*if (sctc2[0] != "https://bls.auto-run") {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  go123 = 0;
+  window.location.href = "https://google.com";
+}
+if (go123 === 0) {
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  window.location.href = "https://google.com";
+}*/
+</script>
+</body>
+</html>
